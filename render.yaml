@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: medication-reminder
+    env: node
+    # IMPORTANT: This is the command that is executed when building the app
+    buildCommand: bash -c "ls -la && chmod +x render-build.sh && ./render-build.sh"
+    startCommand: npm start
+    rootDir: ./
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CI
+        value: true
+      - key: ROLLUP_SKIP_NODEJS_NATIVE
+        value: "1"
+      - key: NPM_CONFIG_LEGACY_PEER_DEPS
+        value: "true"
+      - key: NPM_CONFIG_OPTIONAL
+        value: "false"
+      - key: NPM_CONFIG_BUILD_FROM_SOURCE
+        value: "false"
+      - key: DISABLE_OPTIONAL_DEPENDENCIES
+        value: "true"
+    buildFilter:
+      paths:
+        - "package.json"
+        - "package-lock.json"
+        - "client/**"
+        - "server/**"
+        - "shared/**"
+        - "render-build.sh"
+        - "render.yaml"
+        - ".npmrc"
+        - "node-modules-patch.js"
+    plan: free
