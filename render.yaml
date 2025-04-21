@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: medication-reminder
+    env: node
+    buildCommand: chmod +x render-build.sh && ./render-build.sh
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CI
+        value: true
+      - key: NPM_CONFIG_LEGACY_PEER_DEPS
+        value: true
+      - key: NPM_CONFIG_OPTIONAL
+        value: false
+    plan: free
